@@ -2,7 +2,7 @@
 let move_speed = 8;
 	
 // gravitatsioon
-let gravity = 0.5;
+let gravity = 0.3;
 	
 // lennuelement
 let plane = document.querySelector('.plane');
@@ -15,6 +15,8 @@ let background = document.querySelector('.background').getBoundingClientRect();
 let score_val = document.querySelector('.score_val');
 let message = document.querySelector('.message');
 let score_title = document.querySelector('.score_title');
+let highscore_val = document.querySelector('.highscore_val');
+let highscore_title = document.querySelector('.highscore_title');
 	
 // Setting initial game state to start
 let game_state = 'Start';
@@ -33,7 +35,8 @@ if (e.key == ' ' &&
 	game_state = 'Play';
 	message.innerHTML = '';
 	score_title.innerHTML = 'Score : ';
-	score_val.innerHTML = '0';
+    score_val.innerHTML = '0';
+    highscore_title.innerHTML = 'Highscore : ';
 	play();
 }
 });
@@ -44,8 +47,8 @@ function play() {
         if (game_state != 'Play') return;
         
         // Getting reference to all the pipe elements
-        let pipe_sprite = document.querySelectorAll('.pipe_sprite');
-        pipe_sprite.forEach((element) => {
+        let pipe = document.querySelectorAll('.pipe_sprite');
+        pipe.forEach((element) => {
             
         let pipe_sprite_props = element.getBoundingClientRect();
         plane_props = plane.getBoundingClientRect();
@@ -55,7 +58,7 @@ function play() {
         if (pipe_sprite_props.right <= 0) {
             element.remove();
         } else {
-            // Collision detection with bird and pipes
+            // Collision detection with plane and pipes
             if (
             plane_props.left < pipe_sprite_props.left +
             pipe_sprite_props.width &&
@@ -84,6 +87,9 @@ function play() {
                 element.increase_score == '1'
             ) {
                 score_val.innerHTML = +score_val.innerHTML + 1;
+                if (highscore_val.innerHTML < score_val.innerHTML){
+                    highscore_val.innerHTML = +highscore_val.innerHTML + 1;
+                }
             }
             element.style.left =
                 pipe_sprite_props.left - move_speed + 'px';
@@ -105,7 +111,7 @@ function play() {
         }
         });
 
-        // Collision detection with bird and
+        // Collision detection with plane and
         // window top and bottom
 
         if (plane_props.top <= 0 ||
@@ -143,14 +149,14 @@ function play() {
             
         // Append the created pipe element in DOM
         document.body.appendChild(pipe_sprite_inv);
-        let pipe_sprite = document.createElement('div');
-        pipe_sprite.className = 'pipe_sprite';
-        pipe_sprite.style.top = pipe_posi + pipe_gap + 'vh';
-        pipe_sprite.style.left = '100vw';
-        pipe_sprite.increase_score = '1';
+        let pipe = document.createElement('div');
+        pipe.className = 'pipe_sprite';
+        pipe.style.top = pipe_posi + pipe_gap + 'vh';
+        pipe.style.left = '100vw';
+        pipe.increase_score = '1';
             
         // Append the created pipe element in DOM
-        document.body.appendChild(pipe_sprite);
+        document.body.appendChild(pipe);
         }
         pipe_seperation++;
         requestAnimationFrame(create_pipe);

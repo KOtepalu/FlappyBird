@@ -49,7 +49,7 @@ body {
 	position: fixed;
 	z-index: 10;
 	height: 10vh;
-	font-size: 10vh;
+	font-size: 5vh;
 	font-weight: 100;
 	color: whitesmoke;
 	top: 0;
@@ -57,5 +57,9 @@ body {
 }
 
 .score_val {
+	color: navy;
+}
+
+.highscore_val {
 	color: navy;
 }
