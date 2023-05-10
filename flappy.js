@@ -87,9 +87,9 @@ function play() {
                 element.increase_score == '1'
             ) {
                 score_val.innerHTML = +score_val.innerHTML + 1;
-                if (highscore_val.innerHTML < score_val.innerHTML){
+                if (score_val.innerHTML > highscore_val.innerHTML) {
                     highscore_val.innerHTML = +highscore_val.innerHTML + 1;
-                }
+                }                
             }
             element.style.left =
                 pipe_sprite_props.left - move_speed + 'px';
