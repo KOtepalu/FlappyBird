@@ -30,7 +30,8 @@ body {
 	left: 100vw;
 	height: 70vh;
 	width: 6vw;
-	background-color: whitesmoke;
+	/*background-color: whitesmoke;*/
+	background-image: url('pipe1.png');
 }
 
 .message {
