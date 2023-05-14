@@ -3,7 +3,7 @@
 	padding: 0;
 	box-sizing: border-box;
 }
- 
+
 body {
 	height: 100vh;
 	width: 100vw;
@@ -32,7 +32,6 @@ body {
 	width: 6vw;
 	/*background-color: whitesmoke;*/
 	background-image: url('pipe1.png');
-	overflow: visible;
 }
 
 .message {
@@ -65,12 +64,3 @@ body {
 .highscore_val {
 	color: navy;
 }
-
-.coin {
-	position: absolute;
-	width: 30px;
-	height: 30px;
-	background-color: gold;
-	border-radius: 50%;
-	z-index: 1;
-}  

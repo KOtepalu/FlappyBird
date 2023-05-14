@@ -31,9 +31,6 @@ if (e.key == ' ' &&
 			.forEach((e) => {
 	e.remove();
 	});
-    document.querySelectorAll('.coin').forEach((e) => {
-        e.remove();
-      });
 	plane.style.top = '40vh';
 	game_state = 'Play';
 	message.innerHTML = '';
@@ -44,54 +41,6 @@ if (e.key == ' ' &&
 }
 });
 function play() {
-
-     // Define collectible coins
-    let coins = [];
-
-    // Function to create a coin
-    function createCoin() {
-        const coin = document.createElement('div');
-        coin.className = 'coin';
-        coin.style.left = '100vw';
-        coin.style.top = Math.floor(Math.random() * 65) + 'vh';
-        coins.push(coin);
-        document.body.appendChild(coin);
-    }
-    
-   // Function to move the coins
-   function moveCoins() {
-    for (let i = 0; i < coins.length; i++) {
-      const coin = coins[i];
-      const coinProps = coin.getBoundingClientRect();
-
-      // Check collision between plane and coin
-      if (
-        plane_props.left < coinProps.left + coinProps.width &&
-        plane_props.left + plane_props.width > coinProps.left &&
-        plane_props.top < coinProps.top + coinProps.height &&
-        plane_props.top + plane_props.height > coinProps.top
-      ) {
-        coin.remove();
-        coins.splice(i, 1);
-        score_val.innerHTML = +score_val.innerHTML + 1;
-        if (score_val.innerHTML > +highscore_val.innerHTML) {
-          highscore_val.innerHTML = +highscore_val.innerHTML + 1;
-        }
-      } else {
-        if (game_state === 'Play') {
-            coin.style.left = coinProps.left - move_speed + 'px';
-        }   
-          // Remove coin when it goes off-screen
-          if (coinProps.right < 0) {
-            coin.remove();
-            coins.splice(i, 1);
-          }
-       }
-      }
-      requestAnimationFrame(moveCoins);
-    }
-    requestAnimationFrame(moveCoins);
-
     function move() {
         
         // Detect if game has ended
@@ -138,7 +87,7 @@ function play() {
                 element.increase_score == '1'
             ) {
                 score_val.innerHTML = +score_val.innerHTML + 1;
-                if (score_val.innerHTML > +highscore_val.innerHTML) {
+                if (score_val.innerHTML > highscore_val.innerHTML) {
                     highscore_val.innerHTML = +highscore_val.innerHTML + 1;
                 }
             }
@@ -213,13 +162,4 @@ function play() {
         requestAnimationFrame(create_pipe);
     }
     requestAnimationFrame(create_pipe);
-
-     // Function to create coins at regular intervals
-    function createCoinsInterval() {
-        if (game_state != 'Play') return;
-        createCoin();
-        setTimeout(createCoinsInterval, Math.floor(Math.random() * 3000) + 2000);
-    }
-    createCoinsInterval();
-
 }
